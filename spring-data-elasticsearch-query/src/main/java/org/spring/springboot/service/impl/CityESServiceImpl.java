@@ -33,7 +33,7 @@ public class CityESServiceImpl implements CityService {
     Integer DEFAULT_PAGE_NUMBER = 0; // 默认当前页码
 
     /* 搜索模式 */
-    String SCORE_MODE_SUM = "sum"; // 权重分求和模式
+    private String SCORE_MODE_SUM = "sum"; // 权重分求和模式
     Float  MIN_SCORE = 10.0F;      // 由于无相关性的分值默认为 1 ，设置权重分最小值为 10
 
     @Autowired

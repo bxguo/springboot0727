@@ -16,4 +16,10 @@ public interface CityDao {
      * @param cityName 城市名
      */
     City findByName(@Param("cityName") String cityName);
+    /**
+     * 根据主键id，查询城市信息
+     *
+     * @param id 城市名
+     */
+    City findById(@Param("id") Long id);
 }

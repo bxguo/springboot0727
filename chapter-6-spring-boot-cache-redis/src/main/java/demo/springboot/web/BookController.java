@@ -21,7 +21,7 @@ public class BookController {
     private static final String REDIRECT_TO_BOOK_URL = "redirect:/book";
 
     @Autowired
-    BookService bookService;
+    BookService bookService;  
 
     /**
      * 获取 Book 列表

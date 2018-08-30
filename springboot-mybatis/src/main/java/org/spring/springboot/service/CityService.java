@@ -14,4 +14,5 @@ public interface CityService {
      * @param cityName
      */
     City findCityByName(String cityName);
+    City findById(Long id);
 }
