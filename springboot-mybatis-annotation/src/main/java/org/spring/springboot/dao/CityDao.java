@@ -22,7 +22,11 @@ public interface CityDao {
             @Result(property = "id", column = "id"),
             @Result(property = "provinceId", column = "province_id"),
             @Result(property = "cityName", column = "city_name"),
-            @Result(property = "description", column = "description"),
+            @Result(property = "description", column = "description")
     })
     City findByName(@Param("cityName") String cityName);
+
+    @Insert("insert into city(province_id, city_name, description)values(#{provinceId}, #{cityName}, #{description})")
+    int insertOneCity(City city);
+
 }

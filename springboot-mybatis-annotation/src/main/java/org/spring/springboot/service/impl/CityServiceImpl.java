@@ -21,4 +21,9 @@ public class CityServiceImpl implements CityService {
         return cityDao.findByName(cityName);
     }
 
+    @Override
+    public int insertOneCity(City city) {
+        return cityDao.insertOneCity(city);
+    }
+
 }

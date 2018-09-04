@@ -14,4 +14,6 @@ public interface CityService {
      * @param cityName
      */
     City findCityByName(String cityName);
+
+    int insertOneCity(City city);
 }
