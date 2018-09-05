@@ -26,7 +26,7 @@ public class TimetaskApplicationTests {
                 "</body>\n" +
                 "</html>";
 
-        mailService.sendSimpleMail("bxguo@hotmail.com","测试", content);
+        mailService.sendHtmlMail("bxguo@hotmail.com","测试", content);
     }
 
 }
