@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.File;
 
 /**
  * @author: bxguo
@@ -60,9 +62,19 @@ public class MailServiceImpl implements MailService {
         MimeMessage message = sender.createMimeMessage();
 
         try {
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);
 
-            //helper.
+            messageHelper.setFrom(from);
+            messageHelper.setTo(to);
+            messageHelper.setSubject(subject);
+            messageHelper.setText(content, true);
+
+            FileSystemResource resource = new FileSystemResource(new File(rscPath));
+            messageHelper.addInline(rscId, resource);
+
+            sender.send(message);
+
+            logger.info("带静态资源的邮件发送成功");
 
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -79,6 +91,7 @@ public class MailServiceImpl implements MailService {
         try {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
 
+            messageHelper.setFrom(from);
             messageHelper.setTo(to);
             messageHelper.setSubject(subject);
             messageHelper.setText(content, true);

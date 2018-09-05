@@ -28,5 +28,19 @@ public class TimetaskApplicationTests {
 
         mailService.sendHtmlMail("bxguo@hotmail.com","测试", content);
     }
+    @Test
+    public void sendImgMailTest() {
+
+        String to = "bxguo@hotmail.com";
+        String rscId = "neo006";
+        String subject = "带图片的邮件";
+        String content="<html><body>这是有图片的邮件：<img src=\'cid:" + rscId + "\' ></body></html>";
+        String imgPath = "C:\\Users\\summer\\Pictures\\favicon.png";
+
+
+        mailService.sendInlineResourceMail(to, subject, content, imgPath, rscId);
+    }
+
+
 
 }
