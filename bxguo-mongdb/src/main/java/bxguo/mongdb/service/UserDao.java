@@ -8,12 +8,12 @@ import bxguo.mongdb.domain.UserEntity;
  */
 public interface UserDao {
 
-    public void saveUser(UserEntity user);
+    void saveUser(UserEntity user);
 
-    public UserEntity findUserByUserName(String userName);
+    UserEntity findUserByUserName(String userName);
 
-    public int updateUser(UserEntity user);
+    void updateUser(UserEntity user);
 
-    public void deleteUserById(Long id);
+    void deleteUserById(Long id);
 
 }

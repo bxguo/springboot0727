@@ -2,14 +2,12 @@ package bxguo.mongdb.service.impl;
 
 import bxguo.mongdb.domain.UserEntity;
 import bxguo.mongdb.service.UserDao;
-import com.mongodb.WriteResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
-
-import javax.management.Query;
 
 /**
  * @author: bxguo
@@ -38,9 +36,10 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public UserEntity findUserByUserName(String userName) {
-        Query query=new Query();
-        UserEntity user;
-        user = mongoTemplate.findOne(query , UserEntity.class);
+        Query query=new Query(Criteria.where("userName").is(userName));
+        new Query(Criteria.where("userName").is(userName));
+        UserEntity user = mongoTemplate.findOne(query , UserEntity.class);
+        System.out.println(user);
         return user;
     }
 
@@ -49,17 +48,13 @@ public class UserDaoImpl implements UserDao {
      * @param user
      */
     @Override
-    public int updateUser(UserEntity user) {
+    public void updateUser(UserEntity user) {
         Query query=new Query(Criteria.where("id").is(user.getId()));
         Update update= new Update().set("userName", user.getUserName()).set("passWord", user.getPassWord());
         //更新查询返回结果集的第一条
-        WriteResult result =mongoTemplate.updateFirst(query,update,UserEntity.class);
+        mongoTemplate.updateFirst(query,update,UserEntity.class);
         //更新查询返回结果集的所有
         // mongoTemplate.updateMulti(query,update,UserEntity.class);
-        if(result!=null)
-            return result.getN();
-        else
-            return 0;
     }
 
     /**
