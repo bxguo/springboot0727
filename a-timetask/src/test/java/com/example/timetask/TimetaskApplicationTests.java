@@ -6,6 +6,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -41,6 +43,17 @@ public class TimetaskApplicationTests {
         mailService.sendInlineResourceMail(to, subject, content, imgPath, rscId);
     }
 
+    @Test
+    public void sendTemplateMail() {
+        //创建邮件正文
+        Context context = new Context();
+        context.setVariable("id", "006");
+        TemplateEngine templateEngine = new TemplateEngine();
+
+        String emailContent = templateEngine.process("emailTemplate", context);
+
+        mailService.sendHtmlMail("ityouknow@126.com","主题：这是模板邮件",emailContent);
+    }
 
 
 }
